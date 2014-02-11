@@ -189,7 +189,12 @@
 (comment
   (so->create "Account" {:Name "My new account"} auth))
 
-(defn so->update [])
+(defn so->update [type id updates token]
+  (let [params
+        {:body (cheshire.core/generate-string updates)
+         :content-type :json}]
+    (request :patch
+             (format "/services/data/v%s/sobjects/%s/%s" @+version+ type id) token params)))
 
 (defn so->delete
   "Delete a record
