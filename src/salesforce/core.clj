@@ -181,10 +181,10 @@
   "Create a new record"
   [type record token]
   (let [params
-    { :form-params record
-      :content-type :json }]
+        {:form-params record
+         :content-type :json}]
     (request :post
-      (format "/services/data/v%s/sobjects/Account/" @+version+) token params)))
+             (format "/services/data/v%s/sobjects/%s/" @+version+ type) token params)))
 
 (comment
   (so->create "Account" {:Name "My new account"} auth))
