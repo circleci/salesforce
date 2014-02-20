@@ -181,7 +181,7 @@
   "Create a new record"
   [type record token]
   (let [params
-        {:form-params record
+        {:body (cheshire.core/generate-string record)
          :content-type :json}]
     (request :post
              (format "/services/data/v%s/sobjects/%s/" @+version+ type) token params)))
@@ -229,4 +229,3 @@
 
 (comment
   (soql "SELECT name from Account" auth))
-
